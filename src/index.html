@@ -1,39 +1,66 @@
 <html>
     <head>
 
-        <!-- <script type="text/javascript" src="/src/assets/prueba.js"></script> --->
+        <!-- <script type="text/javascript" src="/src/assets/prueba.js"></script> -->
+
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cabin:700">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-<style>
-/* chrome scrollbars */
-textarea::-webkit-scrollbar 
-{
-    width: 16px;
-    background-color: #444;
-    cursor: pointer;
-}
-textarea::-webkit-scrollbar-track 
-{
-    background-color: #333;    
-    cursor: pointer;
-}
-textarea::-webkit-scrollbar-corner
-{
-  background-color: #484;
-  -webkit-box-shadow: inset 0 0 6px rgba(255,255,255,0.3);
-}
-textarea::-webkit-scrollbar-thumb 
-{
-  background-color: #444;
-  /*outline: 1px solid #666;*/
-  -webkit-box-shadow: inset 0 0 6px rgba(255,255,255,0.3);
-  cursor: pointer;
-}
-</style>
+        <style>
+        /* chrome scrollbars */
+        textarea::-webkit-scrollbar 
+        {
+            width: 16px;
+            background-color: #444;
+            cursor: pointer;
+        }
+        textarea::-webkit-scrollbar-track 
+        {
+            background-color: #333;    
+            cursor: pointer;
+        }
+        textarea::-webkit-scrollbar-corner
+        {
+          background-color: #484;
+          -webkit-box-shadow: inset 0 0 6px rgba(255,255,255,0.3);
+        }
+        textarea::-webkit-scrollbar-thumb 
+        {
+          background-color: #444;
+          /*outline: 1px solid #666;*/
+          -webkit-box-shadow: inset 0 0 6px rgba(255,255,255,0.3);
+          cursor: pointer;
+        }
+        </style>
 </head>
 <body bgcolor="#BAF4F6">
      
+
+<nav class="navbar navbar-light navbar-expand-md navbar-fixed-top navigation-clean-button">
+        <div class="container">
+            <div><a class="navbar-brand" href="#"><span>Practica 2 Compiladores 2 </span> </a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button></div>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav nav-right">
+                    <li class="nav-item"><a class="nav-link active" href="index.html" style="color: var(--bs-white);">home </a></li>
+                    <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#" style="color: var(--bs-white);">Descargas </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" id="exportar3D" name="exportar3D" style="color: var(--bs-white);" href="services.html">Codigo 3D.cpp</a>
+                            <a class="dropdown-item" id="exportarOptimizado" name="exportarOptimizado" style="color: var(--bs-white);" href="#">Codigo Optimizado.cpp</a>
+                            <a class="dropdown-item" id="exportarAssembler" name="exportarAssembler" style="color: var(--bs-white);" href="#">Codigo Assembler.asm</a>
+                        </div>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="about.html" style="color: var(--bs-white);">about </a></li>
+
+
+                </ul>
+                <p class="ms-auto navbar-text actions"><a class="login" href="#">Log In</a> <a class="btn btn-light action-button" role="button" href="signup.html">Sign Up</a></p>
+            </div>
+        </div>
+    </nav>
+
 <div ALIGN="CENTER" ><h2 ALIGN="CENTER" >ANALIZADOR DE GRAMATICA </h2></div>
+
 <script>
     
 //function()
@@ -50,7 +77,7 @@ var cssTable = 'padding:0px 0px 0px 0px!important; margin:0px 0px 0px 0px!import
       var cssButton = 'width:120px; height:40px; border:1px solid #333 !important; border-bottom-color: #484!important; color:#ffe; background-color:#222;';
       var cssCanvas = 'border:0px; background-color:#1c1c20; margin-top:0px; padding-top:0px;';
       var cssTextArea =  'width:auto;'
-                       + 'height:500px;'
+                       + 'height:350;'
                        + 'font-size:14px;'
                        + 'font-family:monospace;'
                        + 'line-height:15px;'
@@ -160,23 +187,74 @@ function readFile(file) {
 }
 };
 </script>
+  <script>
+    /**
+    * Exportar
+    **/
+    function exportar (data, fileName) {
+      const a = document.createElement("a");
+      const contenido = data,
+          blob = new Blob([contenido], {type: "octet/stream"}),
+          url = window.URL.createObjectURL(blob);
+      a.href = url;
+      a.download = fileName;
+      a.click();
+      window.URL.revokeObjectURL(url);
+      
+    };
+    
+    window.onload = function(){
+    // CODIGO 3 DIRECCIONES
+    // CODIGO 3 DIRECCIONES
+    document.querySelector('#exportar3D').onclick = function () {
+      console.log('PRESIONA BOTON');
+      const data = document.querySelector('#area').value;
+      const nombreArchivo = 'Codigo_3Direcciones.cpp'
+      exportar(data, nombreArchivo);
+    }
+    // CODIGO Optimizado.cpp
+    // CODIGO OPTIMIZADO.cpp
+    document.querySelector('#exportarOptimizado').onclick = function () {
+      console.log('PRESIONA BOTON');
+      const data = document.querySelector('#area').value;
+      const nombreArchivo = 'Codigo_3Direcciones.cpp'
+      exportar(data, nombreArchivo);
+    }
+    // CODIGO Assembler.asm
+    // CODIGO Assembler.asm
+    document.querySelector('#exportarAssembler').onclick = function () {
+      console.log('PRESIONA BOTON');
+      const data = document.querySelector('#area').value;
+      const nombreArchivo = 'Codigo_Assembler.asm'
+      exportar(data, nombreArchivo);
+    }
+
+
+    }
+
+
+    </script>
+
 <div class="container profile profile-view" id="profile">
     <div class="row">
         <div class="col-md-12 alert-col relative">
-<div class="input-group"  >
-  <br>
-  <div class="custom-file"  >
-    <input type="file"  id="file" name="file">
-    <label class="custom-file-label" for="file">Busca un archivo</label>
-  </div>
-  <div class="input-group-append">
-    <button type="button" onclick="escribir()" class="btn btn-info">Leer archivo</button>
-  </div>
-  <button type="button" onclick="compilar()" class="btn btn-success">Compilar Gramatica</button>
-  <br>
+            <div class="input-group"  >
+              <br>
+              <div class="custom-file"  >
+                <input type="file"  id="file" name="file">
+                <label class="custom-file-label" for="file">Busca un archivo</label>
+              </div>
+              <div class="input-group-append">
+                <button type="button" onclick="escribir()" class="btn btn-info">Leer archivo</button>
+              </div>
+              <button type="button" onclick="compilar2('aaaaaaayy
+              ')" class="btn btn-success">Compilar Gramatica</button>
+
+              <br>
+            </div>
+        </div>
 </div>
-</div>
-</div>
+
 <div class="row">
     <div class="col-md-12 alert-col relative">
     </div>
@@ -190,5 +268,6 @@ function readFile(file) {
     </div>
 </div>
 </div>
+
 </body>
 </html>
